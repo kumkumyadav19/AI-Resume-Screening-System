@@ -1,0 +1,18 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual env
+venv/
+.env
+
+# Models
+models/*.pkl
+
+# Data
+resumes/
+temp_resume.pdf
+
+# Secrets
+credentials.json
+.env

@@ -1,0 +1,18 @@
+[
+  {
+    "title": "Backend Developer",
+    "description": "python nodejs api backend aws docker database"
+  },
+  {
+    "title": "Data Scientist",
+    "description": "python machine learning pandas numpy statistics deep learning"
+  },
+  {
+    "title": "ML Engineer",
+    "description": "python tensorflow pytorch deployment mlops docker kubernetes"
+  },
+  {
+    "title": "Frontend Developer",
+    "description": "react javascript html css frontend ui"
+  }
+]
