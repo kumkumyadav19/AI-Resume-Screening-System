@@ -23,19 +23,20 @@ def score_resume(clean_text, skills, years):
             [resume_embedding],
             [job_embedding]
         )[0][0]
+        similarity = (similarity + 1) / 2
 
         job_skills = job["description"].split()
 
         matched = list(set(skills).intersection(job_skills))
         missing = list(set(job_skills) - set(skills))
 
-        skill_score = min(len(skills)/5, 1)
-        exp_score = min(years/5, 1)
+        skill_score = len(matched) / len(job_skills)
+        exp_score = min(years / 10, 1)
 
         final = (
-            0.5 * similarity +
-            0.3 * skill_score +
-            0.2 * exp_score
+            0.7 * similarity +
+            0.2 * skill_score +
+            0.1 * exp_score
         )
 
         results.append({

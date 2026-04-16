@@ -31,10 +31,14 @@ def run_pipeline():
             features["years"]
         )
         role = predict_role(features["clean_text"])
+        if role == match["job_title"]:
+            final_label = role
+        else:
+            final_label = role  # prioritize ML prediction
 
         results.append({
             "Name": row["Full Name"],
-            "Best Job Match": match["job_title"],
+            "Best Job Match": final_label,
             "Score": match["score"],
             "skills": features["skills"],
             "years": features["years"],
