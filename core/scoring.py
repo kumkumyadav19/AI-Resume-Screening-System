@@ -17,7 +17,8 @@ def score_resume(clean_text, skills, years):
 
     for job in JOBS:
 
-        job_embedding = model.encode([job["description"]])[0]
+        job_text = " ".join(job["skills"])
+        job_embedding = model.encode([job_text])[0]
 
         similarity = cosine_similarity(
             [resume_embedding],
@@ -25,18 +26,20 @@ def score_resume(clean_text, skills, years):
         )[0][0]
         similarity = (similarity + 1) / 2
 
-        job_skills = job["description"].split()
+        # define clean skill list (fixed phrases)
+        job_skills = job["skills"]
 
-        matched = list(set(skills).intersection(job_skills))
-        missing = list(set(job_skills) - set(skills))
+        # match using full phrases (not split words)
+        matched = [s for s in job_skills if s in clean_text]
+        missing = [s for s in job_skills if s not in clean_text]
 
         skill_score = len(matched) / len(job_skills)
         exp_score = min(years / 10, 1)
 
         final = (
-            0.7 * similarity +
-            0.2 * skill_score +
-            0.1 * exp_score
+            0.8 * similarity +
+            0.15 * skill_score +
+            0.05 * exp_score
         )
 
         results.append({
@@ -50,3 +53,40 @@ def score_resume(clean_text, skills, years):
     best_match = max(results, key=lambda x: x["score"])
 
     return best_match
+
+def score_resume_for_role(clean_text, skills, years, role_name):
+
+    resume_embedding = model.encode([clean_text])[0]
+
+    for job in JOBS:
+        if job["title"].lower() == role_name.lower():
+
+            job_text = " ".join(job["skills"])
+            job_embedding = model.encode([job_text])[0]
+
+            similarity = cosine_similarity(
+                [resume_embedding],
+                [job_embedding]
+            )[0][0]
+            similarity = (similarity + 1) / 2
+
+            job_skills = job["skills"]
+
+            matched = [s for s in job_skills if s in clean_text]
+            missing = [s for s in job_skills if s not in clean_text]
+
+            skill_score = len(matched) / len(job_skills)
+            exp_score = min(years / 10, 1)
+
+            final = (
+                0.8 * similarity +
+                0.15 * skill_score +
+                0.05 * exp_score
+            )
+
+            return {
+                "job_title": job["title"],
+                "score": round(final * 100, 2),
+                "matched_skills": matched,
+                "missing_skills": missing
+            }

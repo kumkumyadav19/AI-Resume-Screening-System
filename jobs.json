@@ -1,18 +1,35 @@
 [
   {
-    "title": "Backend Developer",
-    "description": "python nodejs api backend aws docker database"
-  },
-  {
     "title": "Data Scientist",
-    "description": "python machine learning pandas numpy statistics deep learning"
+    "skills": ["python", "machine learning", "deep learning", "pandas", "numpy", "sql"]
   },
   {
     "title": "ML Engineer",
-    "description": "python tensorflow pytorch deployment mlops docker kubernetes"
+    "skills": ["python", "tensorflow", "pytorch", "docker", "kubernetes"]
   },
   {
     "title": "Frontend Developer",
-    "description": "react javascript html css frontend ui"
+    "skills": ["html", "css", "javascript", "react"]
+  },
+  {
+    "title": "Backend Developer",
+    "skills": ["python", "nodejs", "sql", "django", "flask"]
+  },
+
+  {
+    "title": "DevOps Engineer",
+    "skills": ["docker", "kubernetes", "ci/cd", "jenkins", "aws", "linux"]
+  },
+  {
+    "title": "Data Analyst",
+    "skills": ["excel", "sql", "tableau", "power bi", "python", "data visualization"]
+  },
+  {
+    "title": "Mobile App Developer",
+    "skills": ["android", "kotlin", "java", "flutter", "react native"]
+  },
+  {
+    "title": "Cloud Engineer",
+    "skills": ["aws", "azure", "gcp", "terraform", "docker"]
   }
 ]

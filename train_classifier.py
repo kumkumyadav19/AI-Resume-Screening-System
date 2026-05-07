@@ -14,7 +14,7 @@ y = df["label"]
 
 # split data
 X_train, X_test, y_train, y_test = train_test_split(
-    X, y, test_size=0.3, random_state=42, stratify=y
+    X, y, test_size=0.4, random_state=42, stratify=y
 )
 
 # vectorize
@@ -37,3 +37,19 @@ print("Classification Report:", classification_rep)
 # save model
 pickle.dump(model, open("models/classifier.pkl", "wb"))
 pickle.dump(vectorizer, open("models/vectorizer.pkl", "wb"))
+
+test_samples = [
+    "built dashboards using excel sql and power bi",
+    "developed frontend using react javascript css",
+    "trained machine learning models using python and sklearn",
+    "deployed models using docker kubernetes mlops pipeline",
+    "developed backend api using nodejs express and database",
+    "developed secure rest apis with authentication and database integration",
+    "worked on model serving and production level machine learning systems",
+    "designed ml pipelines and handled model deployment using kubernetes"
+]
+
+for text in test_samples:
+    pred = model.predict(vectorizer.transform([text]))[0]
+    print(f"\nInput: {text}")
+    print(f"Predicted Role: {pred}")

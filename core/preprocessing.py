@@ -10,7 +10,7 @@ SKILLS = [
 def preprocess(text):
     text = re.sub(r'\s+', ' ', text).lower()
 
-    skills = [s for s in SKILLS if s in text.lower()]
+    skills = [s for s in SKILLS if s in text]
 
     years_match = re.findall(r'(\d+)\+?\s*(years|yrs)', text)
     years = max([int(y[0]) for y in years_match], default=0)
